@@ -1,0 +1,7 @@
+### BINARY CONVERTION
+
+##### how to run:
+- git clone reposity
+- cd to the folder
+- open bash and run command "make"
+- run command ./binary with argument n for numbers value and b for binary value then put the value like that : ./binary n13
