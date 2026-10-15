@@ -1,7 +1,96 @@
-### BINARY CONVERTION
+# Binary Converter
 
-##### how to run:
-- git clone reposity
-- cd to the folder
-- open bash and run command "make"
-- run command ./binary with argument n for numbers value and b for binary value then put the value like that : ./binary n13
+A small C++ command-line utility for converting between decimal numbers and binary representations.
+
+## Features
+
+- Convert a decimal integer to a 32-bit binary representation.
+- Accept positive and negative integer values.
+- Validate numeric input and report invalid characters or duplicate decimal points.
+- Provide a binary-to-number conversion routine in the source code.
+
+## Requirements
+
+- A C++ compiler available as `c++`
+- GNU Make
+- Git, if cloning the project from GitHub
+
+## Build
+
+Clone the repository and build the executable:
+
+```bash
+git clone https://github.com/CodeAndCofe/btn-ntb.git
+cd btn-ntb
+make
+```
+
+This creates an executable named `binary`.
+
+## Usage
+
+The program expects one argument. The first character selects the conversion mode:
+
+- `n` — treat the remaining characters as a decimal number and convert it to binary.
+- `b` — treat the remaining characters as a binary value and convert it to a number.
+
+### Decimal to binary
+
+```bash
+./binary n13
+```
+
+Example output:
+
+```text
+00000000 00000000 00000000 00001101
+```
+
+Negative numbers can be passed with a minus sign:
+
+```bash
+./binary n-13
+```
+
+### Binary to decimal
+
+```bash
+./binary b1101
+```
+
+> **Note:** The binary-to-decimal conversion routine is present in the current implementation, but the command-line entry point does not yet call `output_number()`. As a result, this mode currently performs the conversion without displaying the result. Calling `output_number()` after `convert_to_number()` in `converter.cpp` will print the converted number.
+
+## Makefile Commands
+
+```bash
+make          # Build the binary executable
+make clean    # Remove object files
+make fclean   # Remove object files and the executable
+```
+
+## Project Structure
+
+- `converter.cpp` — command-line entry point and mode selection.
+- `numbers.cpp` — decimal-to-binary conversion and binary output.
+- `conver_to_number.cpp` — binary-to-decimal conversion logic.
+- `Converter.hpp` — `numbers` class declaration.
+- `Makefile` — build configuration.
+
+## Input Format
+
+Use the following format:
+
+```text
+./binary [n|b]<value>
+```
+
+For example:
+
+```bash
+./binary n42
+./binary b101010
+```
+
+## License
+
+No license has been specified for this project.
