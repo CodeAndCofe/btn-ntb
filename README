@@ -1,95 +1,162 @@
 # Binary Converter
 
-A small C++ command-line utility for converting between decimal numbers and binary representations.
+A small C++ command-line utility for converting decimal integers to 32-bit binary representations, with a binary-to-number conversion routine included in the source code.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Project Structure](#project-structure)
+- [Build Commands](#build-commands)
+- [Known Limitations](#known-limitations)
+- [License](#license)
+
+## Overview
+
+Binary Converter is a command-line project written in C++ that explores number representation and conversion between decimal and binary formats.
+
+The program accepts an argument that specifies the conversion mode and the value to process. It validates numeric input and provides a 32-bit binary output for decimal integers.
 
 ## Features
 
-- Convert a decimal integer to a 32-bit binary representation.
+- Convert decimal integers into 32-bit binary representations.
 - Accept positive and negative integer values.
-- Validate numeric input and report invalid characters or duplicate decimal points.
-- Provide a binary-to-number conversion routine in the source code.
+- Validate numeric input and detect invalid characters.
+- Detect duplicate decimal points in numeric input.
+- Include a binary-to-number conversion routine.
+- Build the executable using GNU Make.
 
 ## Requirements
 
-- A C++ compiler available as `c++`
-- GNU Make
-- Git, if cloning the project from GitHub
+Before building the project, make sure you have the following tools installed:
 
-## Build
+- A C++ compiler available through the `c++` command.
+- GNU Make.
+- Git, if you want to clone the repository.
 
-Clone the repository and build the executable:
+## Installation
+
+Clone the repository and navigate to the project directory:
 
 ```bash
 git clone https://github.com/CodeAndCofe/btn-ntb.git
 cd btn-ntb
+```
+
+Build the project:
+
+```bash
 make
 ```
 
-This creates an executable named `binary`.
+After a successful build, an executable named `binary` should be available in the project directory.
 
 ## Usage
 
-The program expects one argument. The first character selects the conversion mode:
-
-- `n` — treat the remaining characters as a decimal number and convert it to binary.
-- `b` — treat the remaining characters as a binary value and convert it to a number.
-
-### Decimal to binary
-
-```bash
-./binary n13
-```
-
-Example output:
-
-```text
-00000000 00000000 00000000 00001101
-```
-
-Negative numbers can be passed with a minus sign:
-
-```bash
-./binary n-13
-```
-
-### Binary to decimal
-
-```bash
-./binary b1101
-```
-
-> **Note:** The binary-to-decimal conversion routine is present in the current implementation, but the command-line entry point does not yet call `output_number()`. As a result, this mode currently performs the conversion without displaying the result. Calling `output_number()` after `convert_to_number()` in `converter.cpp` will print the converted number.
-
-## Makefile Commands
-
-```bash
-make          # Build the binary executable
-make clean    # Remove object files
-make fclean   # Remove object files and the executable
-```
-
-## Project Structure
-
-- `converter.cpp` — command-line entry point and mode selection.
-- `numbers.cpp` — decimal-to-binary conversion and binary output.
-- `conver_to_number.cpp` — binary-to-decimal conversion logic.
-- `Converter.hpp` — `numbers` class declaration.
-- `Makefile` — build configuration.
-
-## Input Format
-
-Use the following format:
+The program accepts one command-line argument using the following format:
 
 ```text
 ./binary [n|b]<value>
 ```
 
-For example:
+The first character specifies the conversion mode:
+
+| Prefix | Description |
+|---|---|
+| `n` | Convert a decimal integer to binary. |
+| `b` | Process a binary value using the binary-to-number conversion routine. |
+
+### Decimal to Binary
+
+Use the `n` prefix followed by the decimal integer you want to convert.
+
+**Example:**
 
 ```bash
-./binary n42
-./binary b101010
+./binary n13
 ```
+
+**Output:**
+
+```text
+00000000 00000000 00000000 00001101
+```
+
+The output represents the 32-bit binary form of decimal `13`, displayed in groups of eight bits.
+
+Negative values can also be passed using a minus sign:
+
+```bash
+./binary n-13
+```
+
+The exact representation of negative values depends on the implementation's conversion logic.
+
+### Binary to Number
+
+Use the `b` prefix followed by the binary value.
+
+**Example:**
+
+```bash
+./binary b1101
+```
+
+The expected decimal value for the binary input `1101` is `13`.
+
+**Current behavior:** The binary-to-number conversion routine is present, but the command-line entry point does not yet call `output_number()` after `convert_to_number()`. Consequently, this mode currently performs the conversion without displaying the result.
+
+See [Known Limitations](#known-limitations) for details.
+
+## Project Structure
+
+The project is organized into the following source files:
+
+| File | Responsibility |
+|---|---|
+| `converter.cpp` | Command-line entry point and conversion-mode selection. |
+| `numbers.cpp` | Decimal-to-binary conversion and binary output. |
+| `conver_to_number.cpp` | Binary-to-decimal conversion logic. |
+| `Converter.hpp` | Declaration of the `numbers` class. |
+| `Makefile` | Build rules and compilation commands. |
+
+## Build Commands
+
+The Makefile provides the following commands:
+
+```bash
+make
+```
+
+Compiles the source files and creates the `binary` executable.
+
+```bash
+make clean
+```
+
+Removes generated object files.
+
+```bash
+make fclean
+```
+
+Removes generated object files and the executable.
+
+To rebuild the project from scratch:
+
+```bash
+make re
+```
+
+## Known Limitations
+
+- **Binary-to-number output:** The conversion routine currently does not display its result because `output_number()` is not called from the command-line entry point after `convert_to_number()`.
+- **Input validation:** The program checks for invalid numeric characters and duplicate decimal points. Its exact range limits and handling of malformed binary values depend on the implementation.
+- **License:** No license has been specified for this repository.
 
 ## License
 
